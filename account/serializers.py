@@ -77,6 +77,7 @@ class ForgotPasswordCompleteSerializer(serializers.Serializer):
     def set_new_password(self):
         user = User.objects.get(activation_code=self.validated_data.get('code'))
         password = self.validated_data.get('password')
+        user.password = password # john123 -> fjdshfksffkjnefjhfjk
         user.set_password(password)
         user.activation_code = ''
         user.save(update_fields=['password', 'activation_code'])
