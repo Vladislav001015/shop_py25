@@ -6,7 +6,7 @@ from rest_framework import status, generics, viewsets, mixins
 from rest_framework.views import APIView
 
 from product.serializers import ProductSerializer
-
+from product.tasks import big_function
 
 @api_view(['GET'])
 def get_product(request):
@@ -95,9 +95,6 @@ class ProductMixin(mixins.CreateModelMixin,
 
 @api_view(['GET'])
 def get_hello(request):
-    big_function()
+    big_function.delay()
     return Response('HELLO!!!')
-
-def big_function():
-    import time
-    time.sleep(10)  
+ 
