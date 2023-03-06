@@ -39,7 +39,7 @@ class Order(models.Model):
         default=0
     )
     created_at = models.DateTimeField(auto_now_add=True)
-    activation_code = models.UUIDField(default=uuid.uuid4)
+    activation_code = models.UUIDField(default=uuid.uuid4, blank=True, null=True)
 
     def save(self, *args, **kwargs):
         self.total_price = self.amount * self.product.price

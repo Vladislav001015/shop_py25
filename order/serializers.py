@@ -21,10 +21,9 @@ class OrderSerializer(serializers.ModelSerializer):
         product.amount -= amount
         product.save(update_fields=['amount'])
         
-        order = Order.objects.create(**validated_data)
+        order = Order.objects.create(**validated_data) # amout product
 
         send_order_confirmation_code(order.owner.email, order.activation_code, order.product.title, order.total_price)
 
         return order
-        
         
