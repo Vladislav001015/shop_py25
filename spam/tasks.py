@@ -4,7 +4,7 @@ from spam.models import Contact
 
 @shared_task
 def send_spam():
-    emails = [i.email for i in Contact.objects.all()]
+    emails = [i.email for i in Contact.objects.all()] # [email1, email2]
     send_mail(
         'Py25 shop project', # title
         f'Привет загляни на наш сайт', # body
